@@ -19,6 +19,7 @@ import tensorflow as tf
 import sys
 import time
 
+print("Kmeans (Optimal Version) with " + str(num_clusters) + " clusters and " + str(num_steps) + " steps")
 begin_io_time = time.time()
 # Read input_file
 vector_values = np.loadtxt(sys.argv[1])
@@ -28,7 +29,6 @@ print("Total IO Time: %3.2fs" % float(time.time() - begin_io_time))
 
 num_clusters = int(sys.argv[2])
 num_steps = int(sys.argv[3])
-print("Kmeans (Optimal Version) with " + str(num_clusters) + " clusters and " + str(num_steps) + " steps")
 
 vectors = tf.constant(vector_values)
 centroids = tf.Variable(tf.slice(tf.random_shuffle(vectors),
@@ -48,7 +48,7 @@ means = tf.concat(0, [
                           tf.equal(assignments, c)
                       ), [1, -1])
                   ), reduction_indices=[1])
-    for c in xrange(num_clusters)])
+    for c in range(num_clusters)])
 
 update_centroids = tf.assign(centroids, means)
 init_op = tf.initialize_all_variables()
@@ -58,7 +58,7 @@ sess = tf.Session()
 sess.run(init_op)
 
 begin_time = time.time()
-for step in xrange(num_steps):
+for step in range(num_steps):
     _, centroid_values, assignment_values = sess.run([update_centroids,
                                                       centroids,
                                                       assignments])

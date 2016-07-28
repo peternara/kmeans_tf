@@ -156,17 +156,15 @@ def TFKMeansCluster(vectors, num_clusters, num_steps):
         assignments = sess.run(assignments)
         return centroids, assignments
 
-
+num_clusters = int(sys.argv[2])
+num_steps = int(sys.argv[3])
+print("Kmeans (Simple Version) with " + str(num_clusters) + " clusters and " + str(num_steps) + " steps")
 begin_io_time = time.time()
 # Read input_file
 vector_values = np.loadtxt(sys.argv[1])
 # Delete first row (id)
 vector_values = np.delete(vector_values, 0, 1)
 print("Total IO Time: %3.2fs" % float(time.time() - begin_io_time))
-
-num_clusters = int(sys.argv[2])
-num_steps = int(sys.argv[3])
-print("Kmeans (Simple Version) with " + str(num_clusters) + " clusters and " + str(num_steps) + " steps")
 
 begin_time = time.time()
 centroids, assignments = TFKMeansCluster(vector_values, num_clusters, num_steps)
