@@ -64,6 +64,5 @@ for step in xrange(num_steps):
                                                       assignments])
 print("Total Ex Time: %3.2fs" % float(time.time() - begin_time))
 
-print "centroids"
-print centroid_values
+print ("Centroids: " + str(centroid_values))
 

@@ -169,6 +169,8 @@ num_steps = int(sys.argv[3])
 print("Kmeans (Simple Version) with " + str(num_clusters) + " clusters and " + str(num_steps) + " steps")
 
 begin_time = time.time()
-TFKMeansCluster(vector_values, num_clusters, num_steps)
+centroids, assignments = TFKMeansCluster(vector_values, num_clusters, num_steps)
 print("Total Ex Time: %3.2fs" % float(time.time() - begin_time))
+
+print("Centroids: " + str(centroids))
 
